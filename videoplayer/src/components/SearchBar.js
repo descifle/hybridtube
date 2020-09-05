@@ -25,6 +25,7 @@ class SearchBar extends React.Component {
         localStorage.removeItem('trueUID')
         localStorage.removeItem('username')
         this.toggleModal()
+        window.location = "/"
     }
 
     renderUser() {

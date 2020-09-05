@@ -5,3 +5,8 @@
 .card-title {
     font-weight: bold;
 }
+
+.btn-save {
+    background-color: red;
+    color: white;
+}

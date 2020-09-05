@@ -12,11 +12,6 @@ class LoginScreen extends Component {
     user: {}
   }
 
-    // componentDidUpdate() {
-    //   console.log(this.state.user)
-    // }
-    
-
     handleSubmit = (e) => {
       e.preventDefault()
 
@@ -27,7 +22,7 @@ class LoginScreen extends Component {
 
       // if get request goes thru set cookie / session as logged in return user to videoplayer else allow login requests
 
-      axios.get('http://localhost:5000/users/verify', {
+      axios.get('/users/verify', {
         params: { "username" : user.username, "password" : user.password}
       })
       .then((res) => {

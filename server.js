@@ -25,9 +25,11 @@ const usersRouter = require('./routes/users');
 app.use('/video', videoRouter);
 app.use('/users', usersRouter);
 
-if(process.env.NODE_ENV === 'production') {
-    app.use(express.static('videoplayer/build'));
-}
+// if(process.env.NODE_ENV === 'production') {
+//     app.use(express.static('videoplayer/build'));
+// }
+
+app.use(express.static('videoplayer/build'));
 
 app.listen(port, () => {
     console.log(`server is running on port: ${port}`);

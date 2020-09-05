@@ -45,7 +45,7 @@ class VideoPlayer extends React.Component {
         const {user, loggedIn} = this.state
 
         if(loggedIn) {
-            axios.get('http://localhost:5000/users/get-videos', {
+            axios.get('/users/get-videos', {
             params: {id: user}
             }).then((res) => {
                 this.setState({ savedVideos: res.data.videos})
@@ -66,7 +66,7 @@ class VideoPlayer extends React.Component {
         if(sameVideo) {
             console.log('already saved')
         } else {
-            axios.post('http://localhost:5000/users/save-video', {
+            axios.post('/users/save-video', {
             params: { id: user, videos: video}
             })
             .then((res) => {
@@ -89,7 +89,7 @@ class VideoPlayer extends React.Component {
             videoId: videoID 
         }
         
-        axios.post('http://localhost:5000/users/delete-video', data).then((msg) => {
+        axios.post('/users/delete-video', data).then((msg) => {
             console.log(msg.data)
         }).catch(err => console.log(err))
         setTimeout(() => {
