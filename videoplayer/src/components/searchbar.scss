@@ -1,0 +1,80 @@
+.head {
+    background-color: rgb(88, 88, 88);
+    color: white;
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+    padding: 1rem 2rem;
+}
+
+.field {
+    label {
+        color: rgb(252, 255, 50);
+    }
+}
+
+.modal {
+    color: black;
+}
+
+.logo {
+    width: 3rem;
+}
+
+h1 {
+    font-weight: bold;
+}
+
+.user-auth {
+    display: inline;
+    margin-left: auto;
+    align-self: center;
+    text-align: center;
+
+    .btn-account {
+        display: inline-block;
+        margin: auto;
+
+        &:hover, &:active {
+            background-color: rgb(121, 121, 121);
+            color: white;
+        }
+    }
+
+    .btn-light {
+        margin-left: 0;
+        margin-top: .5rem;
+    }
+
+    // span.btn-light {
+    //     display: inline-block;
+
+    //     &:hover {
+    //         border: 1px solid white;
+    //         color: inherit;
+    //         background-color: rgb(121, 121, 121);
+    //         color: white;
+
+    //         a {
+    //             color: white;
+    //         }
+    //     }
+    // }
+}
+
+.btn-account {
+    background-color: white;
+    color: black;
+}
+
+img {
+    max-width: 100%;
+}
+
+@media(min-width: 40rem) {
+    .user-auth {
+        .btn-light {
+            margin-left: .4rem;
+            margin-top: 0;
+        }
+    }
+}
