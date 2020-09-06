@@ -13,8 +13,8 @@ class App extends Component {
             <Router>
                 <Switch>
                     <Route path={'/'} exact component={VideoPlayer} />
-                    <Route path={'/login'} component={LoginScreen} />
-                    <Route path={'/create'} component={CreateAccount} />
+                    <Route path={'/login'} exact component={LoginScreen} />
+                    <Route path={'/create'} exact component={CreateAccount} />
                 </Switch>
             </Router>
         )

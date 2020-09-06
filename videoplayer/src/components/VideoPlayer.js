@@ -13,7 +13,7 @@ class VideoPlayer extends React.Component {
     state = {savedVideos: [], videos: [], selectedVideo: null, loggedIn: false, user: ''}
 
     componentDidMount() {
-        // this.onTermSubmit('building')
+        this.onTermSubmit('building')
         this.validateLogin()
         this.setState({ user: JSON.parse(localStorage.getItem('trueUID'))})
         setTimeout(() => {
