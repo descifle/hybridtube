@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require('path')
 
 require('dotenv').config();
 
@@ -27,6 +28,14 @@ app.use('/users', usersRouter);
 // if(process.env.NODE_ENV === 'production') {
 //     app.use(express.static('videoplayer/build'));
 // }
+
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'videoplayer/build/index.html'), function(err) {
+      if (err) {
+        res.status(500).send(err)
+      }
+    })
+  })
 
 app.use(express.static('videoplayer/build'));
 
