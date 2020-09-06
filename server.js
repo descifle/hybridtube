@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const path = require('path')
 
 require('dotenv').config();
 
@@ -25,19 +24,17 @@ const usersRouter = require('./routes/users');
 app.use('/video', videoRouter);
 app.use('/users', usersRouter);
 
-// if(process.env.NODE_ENV === 'production') {
-//     app.use(express.static('videoplayer/build'));
-// }
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static('videoplayer/build'));
 
-app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'videoplayer/build/index.html'), function(err) {
-      if (err) {
-        res.status(500).send(err)
-      }
-    })
-  })
 
-app.use(express.static('videoplayer/build'));
+    const path = require('path');
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'videoplayer', 'build', 'index.html'));
+    });
+}
+
+// app.use(express.static('videoplayer/build'));
 
 app.listen(port, () => {
     console.log(`server is running on port: ${port}`);
