@@ -70,12 +70,10 @@ class VideoPlayer extends React.Component {
             params: { id: user, videos: video}
             })
             .then((res) => {
-                this.setState({savedVideos: res.data.videos})
+               console.log('Video saved')
+               this.getSavedVideos()
             }).catch((err) => {console.log(err)})
         }
-
-        this.setState(this.state)
-
         
     }
 
