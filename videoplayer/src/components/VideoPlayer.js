@@ -61,18 +61,22 @@ class VideoPlayer extends React.Component {
             return videos.etag === video.etag
         })
 
+        console.log(this.state.savedVideos)
+        console.log(sameVideo)
+
         const {user} = this.state
 
         if(sameVideo) {
             console.log('already saved')
-        } else {
+        } else if (!sameVideo){
             axios.post('/users/save-video', {
             params: { id: user, videos: video}
-            })
-            .then((res) => {
-               console.log('Video saved')
-               this.getSavedVideos()
             }).catch((err) => {console.log(err)})
+
+            console.log('Video saved')
+            setTimeout(() => {
+                this.getSavedVideos()
+            }, 200)
         }
         
     }
@@ -92,7 +96,7 @@ class VideoPlayer extends React.Component {
         }).catch(err => console.log(err))
         setTimeout(() => {
             this.getSavedVideos()
-        }, 1000)
+        }, 200)
     }
 
     validateLogin = () => {
