@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './videodetail.css';
 
 const VideoDetail = ({video, saveVideo}) => {
+    const [loggedIn, setLoggedIn] = useState(false)
 
+    const validateLogin = () => {
+        if(localStorage.getItem('username') !== "" && localStorage.getItem('username') !== null) {
+            setLoggedIn(true)
+        }
+    }
+
+    useEffect(() => {
+        validateLogin()
+    }, [])
+ 
     if(!video) {
         return <div>Loading...</div>
     }
@@ -17,7 +28,7 @@ const VideoDetail = ({video, saveVideo}) => {
             <div className="card-body">
                 <h4 className="card-title">{video.snippet.title}</h4>
                 <p className="text-muted">{video.snippet.description}</p>
-                <button className="btn btn-save float-right" onClick={() => {saveVideo(video)}}>Save Video</button>
+                <button className="btn btn-save float-right" onClick={loggedIn ? () => {saveVideo(video)} : () => {alert("You must be logged in to use this")}}>Save Video</button>
             </div>
         </div>
     )

@@ -119,7 +119,7 @@ class VideoPlayer extends React.Component {
                                 <div className="col-lg-4">
                                     <VideoList onVideoSelect={this.onVideoSelect} videos={this.state.videos} />
                                 </div>
-                                <div className="col-lg-12">
+                                <div className="col-lg-12 pb-5">
                                     <VideoList removeVideo={this.removeVideo} status={"saved-video"} onVideoSelect={this.onVideoSelect} videos={this.state.savedVideos} />
                                 </div>
                             </div>
