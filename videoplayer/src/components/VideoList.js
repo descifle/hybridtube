@@ -10,7 +10,7 @@ const VideoList = ({ videos, onVideoSelect, status, removeVideo}) => {
 
     return (
         <div className={status}>
-            {status ? <h2 className="w-100">Your Saved Videos</h2> : false}
+            {status ? <h2 className="w-100">{videos.length > 0 ? "Your Saved Videos" : <button className="btn btn-danger">Must be logged in</button>}</h2> : false}
             {renderedList}
         </div>
     )

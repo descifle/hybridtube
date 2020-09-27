@@ -17,7 +17,9 @@
 }
 
 .logo {
-    width: 3rem;
+    width: 5rem;
+    vertical-align: middle;
+    line-height: 6rem;
 }
 
 h1 {
@@ -25,10 +27,16 @@ h1 {
 }
 
 .user-auth {
+    position: relative;
     display: inline;
     margin-left: auto;
     align-self: center;
     text-align: center;
+
+    .btn {
+        height: 2.4rem;
+        width: 8.5rem;
+    }
 
     .btn-account {
         display: inline-block;
@@ -61,6 +69,24 @@ h1 {
     // }
 }
 
+.dropdown-settings {
+    position: absolute;
+    right: 0;
+    z-index: 1000;
+    display: none;
+    min-width: 6rem;
+    padding: .5rem 0;
+    margin: .125rem 0 0;
+    font-size: .85rem;
+    color: #858796;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #e3e6f0;
+    border-radius: .35rem;
+}
+
 .btn-account {
     background-color: white;
     color: black;
@@ -71,6 +97,13 @@ img {
 }
 
 @media(min-width: 40rem) {
+
+    .logo {
+        width: 2rem;
+        vertical-align: auto;
+        line-height: 3rem;
+    }
+
     .user-auth {
         .btn-light {
             margin-left: .4rem;

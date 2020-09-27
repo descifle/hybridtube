@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
 let User = require('../models/user.model');
 
 router.route('/').get((req, res) => {
@@ -48,13 +50,30 @@ router.route('/verify').get((req, res) => {
     });
 });
 
+router.route('/login').post((req, res, next) => {
+    passport.authenticate('local', (err,user,info) => {
+        if(err) throw err;
+        if(!user) res.json("No user Exists");
+        else {
+            req.login(user, err => {
+                if (err) throw err;
+                res.json("successfully authenticated");
+                console.log(req.user);
+            })
+        }
+    })(req,res, next);
+})
+
 router.route('/add').post((req, res) => {
     User.findOne({ username: req.body.username }, async (err, doc) => {
         if(err) throw err;
         if(doc) res.json("User Already Exists")
         if(!doc) {
+
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
             const username = req.body.username;
-            const password = req.body.password;
+            const password = hashedPassword;
             const newUser = new User({username,password});
 
             newUser.save()

@@ -13,7 +13,7 @@ const LoginScreen = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const user = {
+    const userInfo = {
       username: email,
       password: password
     }
@@ -21,10 +21,11 @@ const LoginScreen = () => {
     // if get request goes thru set cookie / session as logged in return user to videoplayer else allow login requests
 
     axios.get('/users/verify', {
-      params: { "username" : user.username, "password" : user.password},
+      params: userInfo,
       withCredentials: true
     })
     .then((res) => {
+      console.log(res)
       if(res.data !== null) {
         setUser(res.data)
         localStorage.setItem('username', JSON.stringify(res.data.username))
@@ -60,6 +61,10 @@ const LoginScreen = () => {
 
   const validateForm = () => {
     return email.length > 0 && password.length > 0;
+  }
+
+  if(user) {
+    console.log('Already logged in')
   }
 
   return (
