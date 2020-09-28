@@ -21,17 +21,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.urlencoded({extended: true}));
 app.use(session({
-    secret: 'secretcode',
+    secret: 'Explsovi',
     resave: true,
     saveUninitialized: true
 }));
 
-app.use(cookieParser('secretcode'));
+app.use(cookieParser('Explsovi'));
 app.use(passport.initialize());
 app.use(passport.session());
 
-const uri = process.env.ATLAS_URI
-// const uri = process.env.MONGODB_URI || 'mongodb://localhost/mytubemern';
+// const uri = process.env.ATLAS_URI
+const uri = process.env.MONGODB_URI || 'mongodb://localhost/mytubemern';
 mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
 
 const connection = mongoose.connection;
@@ -45,17 +45,17 @@ const usersRouter = require('./routes/users');
 app.use('/video', videoRouter);
 app.use('/users', usersRouter);
 
-// if(process.env.NODE_ENV === 'production') {
-//     app.use(express.static('videoplayer/build'));
+if(process.env.NODE_ENV === 'production') {
+    app.use(express.static('videoplayer/build'));
 
 
-//     const path = require('path');
-//     app.get('*', (req, res) => {
-//       res.sendFile(path.resolve(__dirname, 'videoplayer', 'build', 'index.html'));
-//     });
-// }
+    const path = require('path');
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'videoplayer', 'build', 'index.html'));
+    });
+}
 
-app.use(express.static('videoplayer/build'));
+// app.use(express.static('videoplayer/build'));
 
 app.listen(port, () => {
     console.log(`server is running on port: ${port}`);

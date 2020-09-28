@@ -8,7 +8,6 @@ const LoginScreen = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loginErrors, setLoginErrors] = useState('')
-  const [user, setUser] = useState({})
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -17,8 +16,6 @@ const LoginScreen = () => {
       username: email,
       password: password
     }
-
-    // if get request goes thru set cookie / session as logged in return user to videoplayer else allow login requests
 
     // axios.get('/users/login', {
     //   params: userInfo,
@@ -36,27 +33,23 @@ const LoginScreen = () => {
     //   }
     // })
     //-----------------------------------PASSPORT-------------------------------------------------------------
-    // axios.post('/users/login', {
-    //   data: userInfo,
-    //   withCredentials: true
-    // })
-    // .then((res) => {
-    //   console.log(res)
-    //   // if(res.data !== null) {
-    //   //   setUser(res.data)
-    //   //   localStorage.setItem('username', JSON.stringify(res.data.username))
-    //   //   localStorage.setItem('trueUID', JSON.stringify(res.data._id))
-    //   //   window.location = '/'
-    //   // } else {
-    //   //   setLoginErrors('Wrong Username or Password')
-    //   // }
-    // })
     axios({
       method: "POST",
       data: userInfo,
       withCredentials: true,
       url: "/users/login",
-    }).then((res) => {console.log(res)})
+    }).then((res) => {
+      console.log(res)
+      if(typeof res.data === 'string') {
+        setLoginErrors(res.data)
+        return
+      }
+      if(res.data !== null) {
+        localStorage.setItem('username', res.data.username)
+        localStorage.setItem('trueUID', res.data._id)
+        window.location = '/'
+      }
+    })
   }
 
   const onPasswordChange = (e) => {
@@ -83,10 +76,6 @@ const LoginScreen = () => {
 
   const validateForm = () => {
     return email.length > 0 && password.length > 0;
-  }
-
-  if(user) {
-    console.log('Already logged in')
   }
 
   return (

@@ -44,7 +44,7 @@ const SearchBar = ({ onFormSubmit }) => {
         return (
             <span onClick={() => {if(localStorage.getItem('username') !== null && localStorage.getItem('username') !== "") setShowLogout(!showLogout)}} 
                   className="btn btn-light">
-                  {localStorage.getItem('username').slice(1, 15) + '...'}
+                  {localStorage.getItem('username').slice(0, 12) + '...'}
             </span>
             )
         } else {
@@ -61,7 +61,7 @@ const SearchBar = ({ onFormSubmit }) => {
                 </div>
                 <h1>Video Player</h1>
                 <div ref={logoutRef} className="user-auth">
-                    <Link className="btn btn-account" to="/create">Create Account</Link>
+                    {localStorage.getItem('username') ? false : <Link className="btn btn-account" to="/create">Create Account</Link>}
                     {renderUser()}
                     <div className={showLogout ? "dropdown-settings d-block" : "dropdown-settings"} aria-labelledby="dropdownMenuButton">
                         <button onClick={() => {setShowModal(!showModal)}} className="dropdown-item">Logout</button>

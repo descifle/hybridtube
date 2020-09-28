@@ -18,9 +18,10 @@ const VideoPlayer = () => {
 
     useEffect(() => {
         validateLogin()
-        setUser(JSON.parse(localStorage.getItem('trueUID')))
+        setUser(localStorage.getItem('trueUID'))
         onTermSubmit('building')
         if(loggedIn) {
+            // eslint-disable-next-line
             getSavedVideos()
         }
     }, [loggedIn])
@@ -42,10 +43,12 @@ const VideoPlayer = () => {
                 maxResults: '5',
                 key: KEY
             }
-        })
+        }).catch(() => {console.log("Error retrieving data")})
 
-        setVideos(response.data.items)
-        setSelectedVideo(response.data.items[0])
+        if(response) {
+            setVideos(response.data.items)
+            setSelectedVideo(response.data.items[0])
+        }
         
     }
 
@@ -125,7 +128,7 @@ const VideoPlayer = () => {
                                 <VideoList onVideoSelect={onVideoSelect} videos={videos} />
                             </div>
                             <div className="col-lg-12 pb-5">
-                                <VideoList removeVideo={removeVideo} status={"saved-video"} onVideoSelect={onVideoSelect} videos={savedVideos} />
+                                <VideoList userLogged={loggedIn} removeVideo={removeVideo} status={"saved-video"} onVideoSelect={onVideoSelect} videos={savedVideos} />
                             </div>
                         </div>
                     </div>

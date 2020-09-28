@@ -9,15 +9,19 @@ router.route('/login').post((req, res, next) => {
     passport.authenticate('local', (err,user,info) => {
         console.log(info)
         if(err) throw err;
-        if(!user) res.send("No user Exists");
+        if(!user) res.send("That user does not exist");
         else {
             req.logIn(user, err => {
                 if (err) throw err;
-                res.json("successfully authenticated");
+                res.json(req.user);
                 console.log(req.user);
             })
         }
     })(req,res, next);
+})
+
+router.route('/user').get((req, res) => {
+    res.send(req.user)
 })
 
 router.route('/').get((req, res) => {
