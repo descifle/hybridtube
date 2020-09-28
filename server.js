@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 require('dotenv').config();
 
@@ -12,7 +13,10 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // change this to use production server as well
-app.use(cors());
+app.use(cors({
+    origin: 'https://mytubemern.herokuapp.com/',
+    credentials: true
+}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
@@ -46,10 +50,12 @@ if(process.env.NODE_ENV === 'production') {
     app.use(express.static('videoplayer/build'));
 
 
-    const path = require('path');
+    
     app.get('*', (req, res) => {
       res.sendFile(path.resolve(__dirname, 'videoplayer', 'build', 'index.html'));
     });
+} else {
+    app.use(express.static(path.join(__dirname, 'videoplayer/build')));
 }
 
 // app.use(express.static('videoplayer/build'));
