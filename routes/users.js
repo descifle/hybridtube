@@ -14,7 +14,7 @@ router.route('/login').post((req, res, next) => {
             req.logIn(user, err => {
                 if (err) throw err;
                 res.json(req.user);
-                console.log(req.user);
+                // console.log(req.user);
             })
         }
     })(req,res, next);
