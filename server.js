@@ -12,9 +12,8 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5000;
 
-// change this to use production server as well
 app.use(cors({
-    origin: 'https://mytubemern.herokuapp.com/',
+    origin: `http://localhost:${port}`,
     credentials: true
 }));
 
@@ -33,6 +32,7 @@ app.use(passport.session());
 
 // const uri = process.env.ATLAS_URI
 const uri = process.env.MONGODB_URI || 'mongodb://localhost/mytubemern';
+
 mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
 
 const connection = mongoose.connection;
@@ -57,8 +57,6 @@ if(process.env.NODE_ENV === 'production') {
 } else {
     app.use(express.static(path.join(__dirname, 'videoplayer/build')));
 }
-
-// app.use(express.static('videoplayer/build'));
 
 app.listen(port, () => {
     console.log(`server is running on port: ${port}`);

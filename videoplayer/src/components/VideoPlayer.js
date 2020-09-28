@@ -45,7 +45,7 @@ const VideoPlayer = () => {
             }
         }).catch(() => {console.log("Error retrieving data")})
 
-        if(response) {
+        if(response.status === 200) {
             setVideos(response.data.items)
             setSelectedVideo(response.data.items[0])
         }
