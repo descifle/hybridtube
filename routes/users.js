@@ -2,6 +2,23 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 let User = require('../models/user.model');
+require('../passportConfig')(passport);
+
+router.route('/login').post((req, res, next) => {
+    console.log(req.body)
+    passport.authenticate('local', (err,user,info) => {
+        console.log(info)
+        if(err) throw err;
+        if(!user) res.send("No user Exists");
+        else {
+            req.logIn(user, err => {
+                if (err) throw err;
+                res.json("successfully authenticated");
+                console.log(req.user);
+            })
+        }
+    })(req,res, next);
+})
 
 router.route('/').get((req, res) => {
     User.find()
@@ -49,20 +66,6 @@ router.route('/verify').get((req, res) => {
         res.status(400).json('pony:' +  err)
     });
 });
-
-router.route('/login').post((req, res, next) => {
-    passport.authenticate('local', (err,user,info) => {
-        if(err) throw err;
-        if(!user) res.json("No user Exists");
-        else {
-            req.login(user, err => {
-                if (err) throw err;
-                res.json("successfully authenticated");
-                console.log(req.user);
-            })
-        }
-    })(req,res, next);
-})
 
 router.route('/add').post((req, res) => {
     User.findOne({ username: req.body.username }, async (err, doc) => {

@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
 const passport = require('passport');
-const passportLocal = require('passport-local').Strategy;
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const mongoose = require('mongoose');
@@ -30,7 +29,6 @@ app.use(session({
 app.use(cookieParser('secretcode'));
 app.use(passport.initialize());
 app.use(passport.session());
-require('./passportConfig')(passport);
 
 const uri = process.env.ATLAS_URI
 // const uri = process.env.MONGODB_URI || 'mongodb://localhost/mytubemern';

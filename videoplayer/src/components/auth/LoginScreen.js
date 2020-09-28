@@ -20,21 +20,43 @@ const LoginScreen = () => {
 
     // if get request goes thru set cookie / session as logged in return user to videoplayer else allow login requests
 
-    axios.get('/users/verify', {
-      params: userInfo,
-      withCredentials: true
-    })
-    .then((res) => {
-      console.log(res)
-      if(res.data !== null) {
-        setUser(res.data)
-        localStorage.setItem('username', JSON.stringify(res.data.username))
-        localStorage.setItem('trueUID', JSON.stringify(res.data._id))
-        window.location = '/'
-      } else {
-        setLoginErrors('Wrong Username or Password')
-      }
-    })
+    // axios.get('/users/login', {
+    //   params: userInfo,
+    //   withCredentials: true
+    // })
+    // .then((res) => {
+    //   console.log(res)
+    //   if(res.data !== null) {
+    //     setUser(res.data)
+    //     localStorage.setItem('username', JSON.stringify(res.data.username))
+    //     localStorage.setItem('trueUID', JSON.stringify(res.data._id))
+    //     window.location = '/'
+    //   } else {
+    //     setLoginErrors('Wrong Username or Password')
+    //   }
+    // })
+    //-----------------------------------PASSPORT-------------------------------------------------------------
+    // axios.post('/users/login', {
+    //   data: userInfo,
+    //   withCredentials: true
+    // })
+    // .then((res) => {
+    //   console.log(res)
+    //   // if(res.data !== null) {
+    //   //   setUser(res.data)
+    //   //   localStorage.setItem('username', JSON.stringify(res.data.username))
+    //   //   localStorage.setItem('trueUID', JSON.stringify(res.data._id))
+    //   //   window.location = '/'
+    //   // } else {
+    //   //   setLoginErrors('Wrong Username or Password')
+    //   // }
+    // })
+    axios({
+      method: "POST",
+      data: userInfo,
+      withCredentials: true,
+      url: "/users/login",
+    }).then((res) => {console.log(res)})
   }
 
   const onPasswordChange = (e) => {
@@ -69,7 +91,7 @@ const LoginScreen = () => {
 
   return (
     <div className="container">
-      <h1 className="w-100 text-center my-5">VideoSaver</h1>
+      <h1 className="w-100 text-center my-5">Login</h1>
 
       <div className="row justify-content-center">
 

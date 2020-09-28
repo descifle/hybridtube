@@ -36,16 +36,16 @@ h1 {
     .btn {
         height: 2.4rem;
         width: 8.5rem;
+        
+        &:hover, &:active {
+            box-shadow: 0 1px 6px 0 blue;
+            // color: white;
+        }
     }
 
     .btn-account {
         display: inline-block;
         margin: auto;
-
-        &:hover, &:active {
-            background-color: rgb(121, 121, 121);
-            color: white;
-        }
     }
 
     .btn-light {

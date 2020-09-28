@@ -84,7 +84,7 @@ const CreateAccount = () => {
 
   return (
     <div className="container">
-      <h1 className="w-100 text-center my-5">VideoSaver</h1>
+      <h1 className="w-100 text-center my-5">Create a new account</h1>
 
       <div className="row justify-content-center">
 
@@ -97,7 +97,7 @@ const CreateAccount = () => {
                 <div className="col-lg-6">
                   <div className="p-5">
                     <div className="text-center">
-                      <h1 className="h4 text-gray-900 mb-4">Create A New Account</h1>
+                      <h1 className="h4 text-gray-900 mb-4">Create Account</h1>
                       <p className="text-muted my-4">{error ? error :"Join us!"}</p>
                     </div>
                     <form onSubmit={handleSubmit} className="user">
