@@ -1,6 +1,6 @@
 const User = require('./models/user.model');
 const bcrypt = require('bcryptjs');
-const keys = require('./keys')
+// const keys = require('./keys')
 
 // LOCAL //
 // const localStrategy = require('passport-local');
