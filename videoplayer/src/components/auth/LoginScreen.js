@@ -17,10 +17,12 @@ const LoginScreen = () => {
       password: password
     }
 
-    axios.get('/users/verify', {
-      params: userInfo,
-      withCredentials: true
-    })
+    axios({
+        method: "POST",
+        data: userInfo,
+        withCredentials: true,
+        url: "/users/verify",
+      })
     .then((res) => {
       console.log(res)
       if(res.data !== 'wronginfo') {

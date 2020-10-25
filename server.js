@@ -55,18 +55,6 @@ if(process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, 'videoplayer/build')));
 }
 
-// if(process.env.NODE_ENV === 'production') {
-//     app.use(express.static('videoplayer/build'));
-
-
-    
-//     app.get('*', (req, res) => {
-//       res.sendFile(path.resolve(__dirname, 'videoplayer', 'build', 'index.html'));
-//     });
-// } else {
-//     app.use(express.static(path.join(__dirname, 'videoplayer/build')));
-// }
-
 app.listen(port, () => {
     console.log(`server is running on port: ${port}`);
 })

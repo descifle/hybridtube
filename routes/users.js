@@ -71,14 +71,15 @@ router.route('/delete-video').post((req, res) => {
     .catch(err => res.status(400).json('Error:' + err));
 });
 
-router.route('/verify').get((req, res) => {
-    const username = req.query.username;
-    const password = req.query.password;
+router.route('/verify').post((req, res) => {
+    console.log(req.body.password)
+    const username = req.body.username;
+    const password = req.body.password;
 
 
     User.findOne({"username": username})
-    .then(async (user) => {
-        const match = await bcrypt.compare(password, user.password)
+    .then( (user) => {
+        const match = bcrypt.compare(password, user.password)
         if(match) {
            res.json(user)
         } else {
