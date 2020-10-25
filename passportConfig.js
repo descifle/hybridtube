@@ -38,16 +38,16 @@ const GoogleStrategy = require('passport-google-oauth').OAuthStrategy
 // } 
 
 // GOOGLE //
-module.exports = function(passport) {
-    passport.use(new GoogleStrategy({
-        consumerKey: keys.google.clientId,
-        consumerSecret: keys.google.clientSecret,
-        callbackURL: "http://localhost.com/users/auth/google/callback"
-      },
-      function(token, tokenSecret, profile, done) {
-          User.findOrCreate({ googleId: profile.id }, function (err, user) {
-            return done(err, user);
-          });
-      }
-    ));
-}
+// module.exports = function(passport) {
+//     passport.use(new GoogleStrategy({
+//         consumerKey: keys.google.clientId,
+//         consumerSecret: keys.google.clientSecret,
+//         callbackURL: "http://localhost.com/users/auth/google/callback"
+//       },
+//       function(token, tokenSecret, profile, done) {
+//           User.findOrCreate({ googleId: profile.id }, function (err, user) {
+//             return done(err, user);
+//           });
+//       }
+//     ));
+// }

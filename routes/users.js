@@ -2,7 +2,7 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 let User = require('../models/user.model');
-require('../passportConfig')(passport);
+// require('../passportConfig')(passport);
 
 // router.route('/login').post((req, res, next) => {
 //     console.log(req.body)
@@ -20,16 +20,16 @@ require('../passportConfig')(passport);
 //     })(req,res, next);
 // })
 
-router.route('/auth/google').get((req, res) => {
-    passport.authenticate('google', { scope: 'https://www.google.com/m8/feeds' })
-    console.log(req.user)
-}) 
+// router.route('/auth/google').get((req, res) => {
+//     passport.authenticate('google', { scope: 'https://www.google.com/m8/feeds' })
+//     console.log(req.user)
+// }) 
 
-router.route('/auth/google/callback').get(
-passport.authenticate('google', { failureRedirect: '/login' }),
-function(req, res) {
-  res.redirect('/');
-});
+// router.route('/auth/google/callback').get(
+// passport.authenticate('google', { failureRedirect: '/login' }),
+// function(req, res) {
+//   res.redirect('/');
+// });
 
 router.route('/user').get((req, res) => {
     res.send(req.user)
