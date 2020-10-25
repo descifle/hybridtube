@@ -9,3 +9,6 @@
 
 videoplayer/fixup.txt
 videoplayer/build
+/models
+/routes
+keys.js

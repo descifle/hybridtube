@@ -4,21 +4,32 @@ const passport = require('passport');
 let User = require('../models/user.model');
 require('../passportConfig')(passport);
 
-router.route('/login').post((req, res, next) => {
-    console.log(req.body)
-    passport.authenticate('local', (err,user,info) => {
-        console.log(info)
-        if(err) throw err;
-        if(!user) res.send("That user does not exist");
-        else {
-            req.logIn(user, err => {
-                if (err) throw err;
-                res.json(req.user);
-                // console.log(req.user);
-            })
-        }
-    })(req,res, next);
-})
+// router.route('/login').post((req, res, next) => {
+//     console.log(req.body)
+//     passport.authenticate('local', (err,user,info) => {
+//         console.log(info)
+//         if(err) throw err;
+//         if(!user) res.send("That user does not exist");
+//         else {
+//             req.logIn(user, err => {
+//                 if (err) throw err;
+//                 res.json(req.user);
+//                 // console.log(req.user);
+//             })
+//         }
+//     })(req,res, next);
+// })
+
+router.route('/auth/google').get((req, res) => {
+    passport.authenticate('google', { scope: 'https://www.google.com/m8/feeds' })
+    console.log(req.user)
+}) 
+
+router.route('/auth/google/callback').get(
+passport.authenticate('google', { failureRedirect: '/login' }),
+function(req, res) {
+  res.redirect('/');
+});
 
 router.route('/user').get((req, res) => {
     res.send(req.user)
@@ -64,8 +75,16 @@ router.route('/verify').get((req, res) => {
     const username = req.query.username;
     const password = req.query.password;
 
-    User.findOne({"username": username, "password" : password})
-    .then(user => res.json(user))
+
+    User.findOne({"username": username})
+    .then(async (user) => {
+        const match = await bcrypt.compare(password, user.password)
+        if(match) {
+           res.json(user)
+        } else {
+            res.json('wronginfo')
+        }
+    })
     .catch(err => {
         res.status(400).json('pony:' +  err)
     });

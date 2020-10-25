@@ -61,7 +61,7 @@ const SearchBar = ({ onFormSubmit }) => {
                 </div>
                 <h1>Video Player</h1>
                 <div ref={logoutRef} className="user-auth">
-                    {localStorage.getItem('username') ? false : <Link className="btn btn-account" to="/create">Create Account</Link>}
+                    {localStorage.getItem('username') ? false : <Link className="btn btn-account" to="/create">Register</Link>}
                     {renderUser()}
                     <div className={showLogout ? "dropdown-settings d-block" : "dropdown-settings"} aria-labelledby="dropdownMenuButton">
                         <button onClick={() => {setShowModal(!showModal)}} className="dropdown-item">Logout</button>

@@ -17,38 +17,46 @@ const LoginScreen = () => {
       password: password
     }
 
-    // axios.get('/users/login', {
-    //   params: userInfo,
-    //   withCredentials: true
-    // })
-    // .then((res) => {
-    //   console.log(res)
-    //   if(res.data !== null) {
-    //     setUser(res.data)
-    //     localStorage.setItem('username', JSON.stringify(res.data.username))
-    //     localStorage.setItem('trueUID', JSON.stringify(res.data._id))
-    //     window.location = '/'
-    //   } else {
-    //     setLoginErrors('Wrong Username or Password')
-    //   }
-    // })
-    //-----------------------------------PASSPORT-------------------------------------------------------------
-    axios({
-      method: "POST",
-      data: userInfo,
-      withCredentials: true,
-      url: "/users/login",
-    }).then((res) => {
+    axios.get('/users/verify', {
+      params: userInfo,
+      withCredentials: true
+    })
+    .then((res) => {
       console.log(res)
-      if(typeof res.data === 'string') {
-        setLoginErrors(res.data)
-        return
-      }
-      if(res.data !== null) {
+      if(res.data !== 'wronginfo') {
         localStorage.setItem('username', res.data.username)
         localStorage.setItem('trueUID', res.data._id)
         window.location = '/'
+      } else if (res.status === 400 || res.data === "wronginfo") {
+        setLoginErrors('Wrong Username or Password')
+        console.log('setting errors')
       }
+    })
+    //-----------------------------------PASSPORT-------------------------------------------------------------
+    // axios({
+    //   method: "POST",
+    //   data: userInfo,
+    //   withCredentials: true,
+    //   url: "/users/login",
+    // }).then((res) => {
+    //   console.log(res)
+    //   if(typeof res.data === 'string') {
+    //     setLoginErrors(res.data)
+    //     return
+    //   }
+    //   if(res.data !== null) {
+    //     localStorage.setItem('username', res.data.username)
+    //     localStorage.setItem('trueUID', res.data._id)
+    //     window.location = '/'
+    //   }
+    // })
+  }
+
+  const googleLogin = () => {
+
+    axios({
+      method: 'GET',
+      url: "users/auth/google",
     })
   }
 
@@ -124,6 +132,9 @@ const LoginScreen = () => {
                       <button disabled={!validateForm()} className="btn btn-primary btn-user btn-block">
                         Login
                       </button>
+                      <div onClick={() => {googleLogin()}} className="btn btn-google btn-user btn-block">
+                      <i className="fab fa-google fa-fw"></i> Login with Google
+                      </div>
                       <Link to="/" className="btn btn-block">Continue without logging in</Link>
                       <hr/>
                     </form>
