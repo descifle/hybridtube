@@ -13,7 +13,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors({
-    origin: `http://localhost:${port}`,
+    origin: `http://mytubemern.herokuapp.com:${port}`,
     credentials: true
 }));
 
