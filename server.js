@@ -27,8 +27,8 @@ app.use(cookieParser('Explsovi'));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// const uri = process.env.ATLAS_URI
-const uri = process.env.MONGODB_URI || 'mongodb://localhost/mytubemern';
+const uri = process.env.ATLAS_URI
+// const uri = process.env.MONGODB_URI || 'mongodb://localhost/mytubemern';
 
 mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true});
 
